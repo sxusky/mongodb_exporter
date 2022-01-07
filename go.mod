@@ -6,7 +6,7 @@ go 1.17
 // until we have everything we need in a tagged release.
 
 require (
-	github.com/AlekSi/pointer v1.1.0
+	github.com/AlekSi/pointer v1.2.0
 	github.com/alecthomas/kong v0.2.17
 	github.com/golang/snappy v0.0.3 // indirect
 	github.com/klauspost/compress v1.13.5 // indirect
