@@ -68,6 +68,7 @@ type Opts struct {
 	EnableTopMetrics       bool
 	EnableIndexStats       bool
 	EnableCollStats        bool
+	EnableProfile          bool
 
 	EnableOverrideDescendingIndex bool
 
@@ -181,6 +182,12 @@ func (e *Exporter) makeRegistry(ctx context.Context, client *mongo.Client, topol
 		ddc := newDiagnosticDataCollector(ctx, client, e.opts.Logger,
 			e.opts.CompatibleMode, topologyInfo)
 		registry.MustRegister(ddc)
+	}
+
+	if e.opts.EnableProfile && requestOpts.EnableProfile {
+		pcc := newSystemProfileCollector(ctx, client, e.opts.Logger,
+			e.opts.CompatibleMode, topologyInfo)
+		registry.MustRegister(pcc)
 	}
 
 	if e.opts.EnableDBStats && limitsOk && requestOpts.EnableDBStats {

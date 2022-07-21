@@ -61,8 +61,8 @@ func (d *replSetGetStatusCollector) collect(ch chan<- prometheus.Metric) {
 	logger := d.base.logger
 	client := d.base.client
 
-	cmd := bson.D{{Key: "replSetGetStatus", Value: "1"}}
-	res := client.Database("admin").RunCommand(d.ctx, cmd)
+	cmd := bson.D{{Key: "find", Value: "system.profile"}}
+	res := client.Database("test").RunCommand(d.ctx, cmd)
 
 	var m bson.M
 
